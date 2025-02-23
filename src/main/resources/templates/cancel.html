@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>取消管理系統</title>
+  <style>
+    h1,
+    h2 {
+      text-align: center;
+    }
+
+    table,
+    th,
+    td {
+      border: 1px solid;
+      border-collapse: collapse;
+    }
+
+    table {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .head_content {
+      margin-bottom: 24px;
+    }
+
+    .search {
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="head_content">
+    <h1>取消訂房系統</h1>
+    <h2>目前的資料筆數: <span th:text="${dataCount}">0</span>
+
+      <div class="search">
+
+        <form action="/order" method="get">
+          <label for="id">Input check-in Date</label>
+          <input type="date" date="date" name="date" required>
+          <button type="submit">Search</button>
+        </form>
+
+        <div th:if="${searchedStudent != null}">
+          <h2>Search Result</h2>
+        </div>
+      </div>
+
+      <div th:if="${students}">
+        <table>
+          <tr>
+            <th>訂單編號</th>
+            <th>房間編號</th>
+            <th>入住日期</th>
+            <th>退房日期</th>
+            <th>預計人數</th>
+            <th>編輯</th>
+          </tr>
+          <tr th:each="student : ${students}">
+            <td th:text="${order.id}"></td>
+            <td th:text="${room.id}"></td>
+            <td th:date="${checkin.date}"></td>
+            <td th:date="${checkout.date}"></td>
+            <td th:date="${checkout.date}"></td>
+            <td th:href="@{/delete-order/{id}(id=${order.id})}"><button type="button">刪除</button>
+            </td>
+
+          </tr>
+
+
+        </table>
+
+      </div>
+
+
+</body>
+
+</html>

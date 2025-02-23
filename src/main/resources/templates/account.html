@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit account</title>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Edit account</h1>
+    <form th:action="@{/register}" method="get">
+
+      <label for="name">User Name:</label>
+      <input type="text" id="name" name"name" th:value="${username}" required>
+      <br>
+
+      <label for="password">Password:</label>
+      <input type="text" id="password" password"password" th:value="${password}" required>
+      <br>
+
+      <label for="phone">Phone:</label>
+      <input type="text" id="phone" phone"phone" th:value="${phone}" required>
+      <br>
+
+      <label for="email">Email:</label>
+      <input type="text" id="email" email"email" th:value="${email}" required>
+      <br>
+
+      <button for="submit">Save</button>
+
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,49 @@
+# This docker-compose file is for local development or CI only. Do not use this in online environment!
+name: booking-system
+
+x-db-base: &db-base
+  image: public.ecr.aws/docker/library/mysql:8
+  environment:
+    - MYSQL_DATABASE=database_name
+    - MYSQL_ROOT_PASSWORD=root
+    - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+  healthcheck:
+    test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+    timeout: 1s
+    retries: 10
+    start_period: 5s
+  networks:
+    - backend
+
+services:
+  db:
+    <<: *db-base
+    profiles: [ 'dev' ]
+    ports:
+      - "5588:3306"
+    volumes:
+      - ./_volume/data/db:/var/lib/mysql/
+
+  redis:
+    image: public.ecr.aws/docker/library/redis:7-alpine
+    profiles: [ 'dev' ]
+    ports:
+      - "6379:6379"
+    networks:
+      - backend
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    platform: linux/amd64
+    profiles: [ 'dev' ]
+    environment:
+      - PMA_HOST=db
+      - MYSQL_ROOT_PASSWORD=root
+    ports:
+      - "8080:80"
+    networks:
+      - backend
+
+networks:
+  backend:
+    name: booking-backend

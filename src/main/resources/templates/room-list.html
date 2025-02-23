@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>room list</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        .room {
+            display: inline-block;
+            margin: 10px;
+            text-align: center;
+        }
+
+        .room img {
+            width: 200px;
+            height: 150px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Room List</h1>
+    <input type="text" id="searchInput" placeholder="search room name...">
+
+    <div id="roomList" th:fragment="roomList">
+        <div th:each="room : ${room}" class="room">
+            <img th:src="@{${room.imageUrl}}" alt="Room Image">
+            <h3 th:text="${room.roomType}"></h3>
+            <p th:text="${room.description}"></p>
+            <p th:text="${room.capacity}"></p>
+            <button><a th:href="@{/booking/{id}(id=${room.id})}" target="_self">確定訂房</a></button>
+        </div>
+    </div>
+
+
+</body>
+
+</html>
