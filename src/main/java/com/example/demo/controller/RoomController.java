@@ -43,7 +43,7 @@ public class RoomController {
 
 	@GetMapping("/searchRooms/{capacity}")
 	public String searchRooms(@PathVariable("capacity") Long capacity, Model model) {
-		List<Room> room = roomService.getRoomOvercapacity(capacity);
+		List<Room> room = roomService.getRoomOverCapacity(capacity);
 		model.addAttribute("room", room);
 		return "room-list";
 	}

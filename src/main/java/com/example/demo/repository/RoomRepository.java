@@ -12,5 +12,5 @@ import com.example.demo.entity.Room;
 public interface RoomRepository extends JpaRepository<Room, Long> {
 
 	@Query(value = "SELECT * FROM project_room WHERE capacity >= :capacity", nativeQuery = true)
-	List<Room> findRoomOvercapacity(Long capacity);
+	List<Room> findRoomOverCapacity(Long capacity);
 }

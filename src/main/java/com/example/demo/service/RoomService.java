@@ -29,7 +29,7 @@ public class RoomService {
 		return room.orElseThrow(() -> new RuntimeException("Room ID not found :" + id));
 	}
 
-	public List<Room> getRoomOvercapacity(Long capacity) {
-		return roomRepository.findRoomOvercapacity(capacity);
+	public List<Room> getRoomOverCapacity(Long capaity) {
+		return roomRepository.findRoomOverCapacity(capaity);
 	}
 }
